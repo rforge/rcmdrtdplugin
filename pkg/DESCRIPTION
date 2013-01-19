@@ -1,0 +1,12 @@
+Package: RcmdrPlugin.TeachingDemos
+Type: Package
+Title: Rcmdr Teaching Demos Plug-In
+Version: 1.0-7
+Date: 2013-01-19
+Author: John Fox <jfox@mcmaster.ca>
+Maintainer: John Fox <jfox@mcmaster.ca>
+Depends: rgl, TeachingDemos
+Imports: Rcmdr
+Suggests: tkrplot
+Description: This package provides an Rcmdr "plug-in" based on the TeachingDemos package, and is primarily for illustrative purposes.
+License: GPL (>= 2)

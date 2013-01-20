@@ -8,6 +8,7 @@
 
 .onAttach <- function(libname, pkgname){
     if (!interactive()) return()
+    putRcmdr("slider.env", new.env())    
     Rcmdr <- options()$Rcmdr
     plugins <- Rcmdr$plugins
     if (!pkgname %in% plugins) {
@@ -230,20 +231,19 @@ slider <- function (sl.functions, sl.names, sl.mins, sl.maxs, sl.deltas,
 {
     if (!missing(no)) 
         return(as.numeric(tclvalue(get(paste("slider", no, sep = ""), 
-            envir = slider.env))))
+            envir = getRcmdr("slider.env")))))
     if (!missing(set.no.value)) {
         try(eval(parse(text = paste("tclvalue(slider", set.no.value[1], 
-            ")<-", set.no.value[2], sep = "")), envir = slider.env))
+            ")<-", set.no.value[2], sep = "")), envir = getRcmdr("slider.env")))
         return(set.no.value[2])
     }
-    if (!exists("slider.env")) 
+#    if (!exists("slider.env")) 
 #        slider.env <<- new.env()
 #        assign("slider.env", new.env(), envir=.GlobalEnv)
-        justDoIt("slider.env <- new.env()")
     if (!missing(obj.name)) {
         if (!missing(obj.value)) 
-            assign(obj.name, obj.value, envir = slider.env)
-        else obj.value <- get(obj.name, envir = slider.env)
+            assign(obj.name, obj.value, envir = getRcmdr("slider.env"))
+        else obj.value <- get(obj.name, envir = getRcmdr("slider.env"))
         return(obj.value)
     }
     if (missing(title)) 
@@ -257,16 +257,16 @@ slider <- function (sl.functions, sl.names, sl.mins, sl.maxs, sl.deltas,
         sl.functions <- function(...) {
         }
     for (i in seq(sl.names)) {
-        eval(parse(text = paste("assign('slider", i, "',tclVar(sl.defaults[i]), envir=slider.env)", 
+        eval(parse(text = paste("assign('slider", i, "',tclVar(sl.defaults[i]), envir=getRcmdr('slider.env'))", 
             sep = "")))
         tkpack(fr <- tkframe(nt))
         lab <- tklabel(fr, text = sl.names[i], width = "25")
         sc <- tkscale(fr, from = sl.mins[i], to = sl.maxs[i], 
             showvalue = TRUE, resolution = sl.deltas[i], orient = "horiz")
         tkpack(lab, sc, side = "right")
-        assign("sc", sc, envir = slider.env)
+        assign("sc", sc, envir = getRcmdr("slider.env"))
         eval(parse(text = paste("tkconfigure(sc,variable=slider", 
-            i, ")", sep = "")), envir = slider.env)
+            i, ")", sep = "")), envir = getRcmdr("slider.env"))
         sl.fun <- if (length(sl.functions) > 1) 
             sl.functions[[i]]
         else sl.functions
@@ -275,7 +275,7 @@ slider <- function (sl.functions, sl.names, sl.mins, sl.maxs, sl.deltas,
                 sl.fun, "}")))
         tkconfigure(sc, command = sl.fun)
     }
-    assign("slider.values.old", sl.defaults, envir = slider.env)
+    assign("slider.values.old", sl.defaults, envir = getRcmdr("slider.env"))
     tkpack(f.but <- tkframe(nt), fill = "x")
     tkpack(tkbutton(f.but, text = "Exit", command = function() tkdestroy(nt)), 
         side = "right")
@@ -286,7 +286,7 @@ slider <- function (sl.functions, sl.names, sl.mins, sl.maxs, sl.deltas,
                 reset.function, "}")))
         tkpack(tkbutton(f.but, text = "Reset", command = function() {
             for (i in seq(sl.names)) eval(parse(text = paste("tclvalue(slider", 
-                i, ")<-", sl.defaults[i], sep = "")), envir = slider.env)
+                i, ")<-", sl.defaults[i], sep = "")), envir = getRcmdr("slider.env"))
             reset.function()
         }), side = "right")
     }

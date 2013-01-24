@@ -1,6 +1,6 @@
 # Some Rcmdr dialogs for the TeachingDemos package
 
-# last modified: 2013-01-19 by J. Fox
+# last modified: 2013-01-24 by J. Fox
 
 # Note: the following function (with contributions from Richard Heiberger and Milan Bouchet-Valat) 
 # can be included in any Rcmdr plug-in package to cause the package to load
@@ -145,7 +145,7 @@ flipCoin <- function(){
     use.rgl <- options("Rcmdr")[[1]]$use.rgl
     if (length(use.rgl) == 0 || use.rgl) require(rgl)
     rgl.open()
-    plot.rgl.coin()
+    rgl.coin()
     flip.rgl.coin()
     }
     
@@ -154,7 +154,7 @@ rollDie <- function(){
     use.rgl <- options("Rcmdr")[[1]]$use.rgl
     if (length(use.rgl) == 0 || use.rgl) require(rgl)
     rgl.open()
-    plot.rgl.die()
+    rgl.die()
     roll.rgl.die()
     }
     

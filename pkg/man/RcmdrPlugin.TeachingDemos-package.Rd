@@ -13,7 +13,7 @@ This package provides an Rcmdr "plug-in" based on the TeachingDemos package, and
 Package: \tab RcmdrPlugin.TeachingDemos\cr
 Type: \tab Package\cr
 Version: \tab 1.0-7\cr
-Date: \tab 2013-01-19\cr
+Date: \tab 2013-01-24\cr
 License: \tab GPL version 2 or newer\cr
 }
 }

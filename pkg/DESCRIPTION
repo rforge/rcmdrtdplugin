@@ -5,8 +5,8 @@ Version: 1.2-0
 Date: 2020-12-02
 Author: John Fox <jfox@mcmaster.ca>
 Maintainer: John Fox <jfox@mcmaster.ca>
-Depends: rgl, TeachingDemos (>= 2.9)
-Suggests: tkrplot
-Imports: Rcmdr
+Depends: TeachingDemos (>= 2.9)
+Suggests: rgl, tkrplot
+Imports: Rcmdr, tcltk, graphics, stats
 Description: Provides an Rcmdr "plug-in" based on the TeachingDemos package, and is primarily for illustrative purposes.
 License: GPL (>= 2)
